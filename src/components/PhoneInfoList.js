@@ -4,13 +4,22 @@ import PhoneInfo from './PhoneInfo';
 
 class PhoneInfoList extends Component {
   static defaultProps = {
-    data: []
+    data: [],  
+    onRemove: () => console.warn('onRemove not defined'),
+    onUpdate: () => console.warn('onUpdate not defined'),
   }
 
   render() {
-    const { data } = this.props;
-    const list = data.map(
-      info => (<PhoneInfo key={info.id} info={info}/>)
+    const { data, onRemove, onUpdate } = this.props;
+    const list = data.map(  // map을 통하여 JSX로 변환
+      info => (
+      <PhoneInfo 
+      key={info.id} 
+      // key값 : 리액트 배열을 렌더링할 때, 필수 값
+      info={info}
+      onRemove={onRemove}
+      onUpdate={onUpdate}
+      />)
     );
 
     return (
